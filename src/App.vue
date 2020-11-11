@@ -5,10 +5,21 @@
 </template>
 
 <script>
-
+import AxiosList from '@/axios'
 export default {
   name: 'App',
-  components: {},
+  created() {
+    this.getTianqi()
+  },
+  methods: {
+    getTianqi() {
+      AxiosList.getTianqi().then(res => {
+        if (res) {
+          window.wea = res.wea
+        }
+      })
+    }
+  }
 }
 </script>
 

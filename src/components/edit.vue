@@ -1,23 +1,19 @@
 <template>
   <div>
-    <!-- <div class="ql-container ql-snow">
-      <div class="ql-editor" v-html="content"></div>
-    </div>-->
+
     <el-dialog :before-close="close" title="日记" :visible.sync="visible">
       <quill-editor
         v-model="content"
         ref="myQuillEditor"
         :options="editorOption"
       ></quill-editor>
+      <el-button class="btn" @click="add" type="primary">添加</el-button>
     </el-dialog>
   </div>
 </template>
 
 <script>
 import { quillEditor } from "vue-quill-editor";
-import "quill/dist/quill.core.css";
-import "quill/dist/quill.snow.css";
-import "quill/dist/quill.bubble.css";
 export default {
   name: "edit",
   components: {
@@ -41,10 +37,23 @@ export default {
   methods: {
     close() {
       this.$emit('close')
+    },
+    add() {
+      const time = this.$moment().format("YYYY-MM-DD");
+      const obj = localStorage.getItem('my_diary') && JSON.parse(localStorage.getItem('my_diary')) || {}
+      obj[time] = {
+        content: this.content,
+        wea: window.wea
+      }
+      localStorage.setItem('my_diary', JSON.stringify(obj))
+      this.$emit('close', true)
     }
   }
 };
 </script>
 
 <style scoped>
+.btn {
+  margin-top: 20px;
+}
 </style>

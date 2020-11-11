@@ -10,6 +10,10 @@ import Out from '@/icon/out.vue'
 import Help from '@/icon/help.vue'
 import Remind from '@/icon/remind.vue'
 import Setting from '@/icon/setting.vue'
+// 富文本组件样式导入
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
 Vue.component('i-out', Out)
 Vue.component('i-help', Help)
 Vue.component('i-remind', Remind)

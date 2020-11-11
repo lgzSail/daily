@@ -10,8 +10,14 @@
       </div>
     </div>
     <div class="content">
-      <el-card class="cardWidth">
-        <div>时间</div>
+      <el-card v-for="(value, key, index) in obj" :key="index" class="cardWidth">
+          <div class="itemTitle">
+            <div class="time">日期：{{key}}</div>
+            <div>天气：{{value.wea}}</div>
+          </div>
+          <div class="ql-container ql-snow">
+            <div class="ql-editor" v-html="value.content"></div>
+          </div>
       </el-card>
     </div>
   </div>
@@ -27,14 +33,18 @@ export default {
   data() {
     return {
       dialogVisible: false,
+      obj: localStorage.getItem('my_diary') && JSON.parse(localStorage.getItem('my_diary')) || {}
     };
   },
   methods: {
     openDialog() {
       this.dialogVisible = true;
     },
-    closeDialog() {
+    closeDialog(bol) {
       this.dialogVisible = false;
+      if (bol) {
+        this.obj = JSON.parse(localStorage.getItem('my_diary'))
+      }
     },
   },
 };
@@ -67,5 +77,12 @@ export default {
 }
 .cardWidth {
   width: 100%;
+}
+.time {
+  margin-bottom: 10px;
+}
+.itemTitle {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
