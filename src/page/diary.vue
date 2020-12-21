@@ -77,6 +77,7 @@ export default {
 }
 .cardWidth {
   width: 100%;
+  margin-bottom: 20px;
 }
 .time {
   margin-bottom: 10px;
